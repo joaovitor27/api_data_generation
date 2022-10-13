@@ -1,11 +1,13 @@
-from fordev.generators import people
+import fordev
+
+from baseModel.base_model import ValidatorsCpf
 
 
-def generation_people(number_people: int, sex: str, age: int, uf_code: str, formatting: bool, data_only: bool) -> {}:
+def generation_people(number_people: int, sex: str, age: int, uf_code: str, formatting: bool,
+                      data_only: bool) -> [] or {}:
     """
-    `Generate a list of people with the specified parameters.`
-
-    The function takes in the following parameters:
+    > This function generates a list of people with the specified parameters
+        The function takes in the following parameters:
 
     - `number_people`: The number of people to generate.
     - `sex`: The sex of the people to generate.
@@ -14,27 +16,32 @@ def generation_people(number_people: int, sex: str, age: int, uf_code: str, form
     - `formatting`: Whether to format the data or not.
     - `data_only`: Whether to return only the data or not
 
-    :param number_people: The number of people you want to generate
+    :param number_people: number of people to be generated
     :type number_people: int
-    :param sex: 'M' for male, 'F' for female, 'A' for both
+    :param sex: 'M' or 'F'
     :type sex: str
-    :param age: The age of the person
+    :param age: int
     :type age: int
-    :param uf_code: The code of the state you want to generate people from
+    :param uf_code: The code of the state you want to generate people
     :type uf_code: str
-    :param formatting: If True, the data will be formatted
+    :param formatting: True or False
     :type formatting: bool
-    :param data_only: If True, returns only the data, without the formatting
+    :param data_only: If True, the function will return a list of dictionaries, if False, it will return a list of strings
     :type data_only: bool
-    :return: A dictionary with the following keys:
-        - 'people'
-        - 'sex'
-        - 'age'
-        - 'uf_code'
-        - 'formatting'
-        - 'data_only'
-        - 'number_people'
-        - 'result'
+    :return: A list of dictionaries
     """
-    result = people(number_people, sex, age, uf_code, formatting, data_only)
+
+    result = fordev.generators.people(number_people, sex, age, uf_code, formatting, data_only)
+    return result
+
+
+def validators_cpf(cpf: ValidatorsCpf):
+    """
+    > This function validates a CPF code
+
+    :param cpf: ValidatorsCpf
+    :type cpf: ValidatorsCpf
+    :return: A boolean value.
+    """
+    result = fordev.validators.is_valid_cpf(cpf.cpf_code, cpf.data_only)
     return result
