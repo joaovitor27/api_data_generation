@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-import generation
+from core import generation, validators, consts
 from baseModel.base_model import ValidatorsCpf
 
 app = FastAPI()
@@ -66,5 +66,15 @@ async def validators_cpf(validator_cpf: ValidatorsCpf):
     :return: The result of the function validators_cpf.
     """
 
-    result = generation.validators_cpf(validator_cpf)
+    result = validators.validators_cpf(validator_cpf)
+    return {"result": result}
+
+
+@app.get("/api/uf-codes")
+async def get_uf_codes():
+    """
+    It returns a list of all the uf codes
+    :return: A list of all the uf codes
+    """
+    result = consts.get_all_uf_code()
     return {"result": result}

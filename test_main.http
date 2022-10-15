@@ -14,3 +14,8 @@ GET http://127.0.0.1:8000/api/generation-people
 Accept: application/json
 
 ###
+
+GET http://127.0.0.1:8000/api/uf-codes
+Accept: application/json
+
+###
