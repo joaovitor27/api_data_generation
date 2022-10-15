@@ -1,6 +1,8 @@
 import fordev
 
-from baseModel.base_model import ValidatorsCpf
+from baseModel.base_model import (ValidatorsCpf, ValidatorsRg, ValidatorsBankAccount, ValidatorsCertificate,
+                                  ValidatorsCNH, ValidatorsCNPJ, ValidatorsCreditCard, ValidatorsPisPasep,
+                                  ValidatorsRenavam, ValidatorsVoterTitle, ValidatorsStateRegistration)
 
 
 def generation_people(number_people: int, sex: str, age: int, uf_code: str, formatting: bool,
@@ -33,18 +35,6 @@ def generation_people(number_people: int, sex: str, age: int, uf_code: str, form
     """
 
     result = fordev.generators.people(number_people, sex, age, uf_code, formatting, data_only)
-    return result
-
-
-def validators_cpf(cpf: ValidatorsCpf):
-    """
-    > This function validates a CPF code
-
-    :param cpf: ValidatorsCpf
-    :type cpf: ValidatorsCpf
-    :return: A boolean value.
-    """
-    result = fordev.validators.is_valid_cpf(cpf.cpf_code, cpf.data_only)
     return result
 
 
@@ -371,152 +361,140 @@ def generation_renavam_(data_only: bool):
     return result
 
 
-def validators_rg(rg_code, data_only):
+def validators_cpf(cpf: ValidatorsCpf):
     """
-    It validates a brazilian RG number.
+    > This function validates a CPF code
 
-    :param rg_code: The RG code to be validated
-    :param data_only: If True, the function will return a dictionary with the following keys:
+    :param cpf: ValidatorsCpf
+    :type cpf: ValidatorsCpf
     :return: A boolean value.
     """
-    result = fordev.validators.is_valid_rg(rg_code, data_only)
+    result = fordev.validators.is_valid_cpf(cpf.cpf_code, cpf.data_only)
     return result
 
 
-def validators_bank_account(bank: int, agency: str, account: str, data_only: bool):
+def validators_rg(rg: ValidatorsRg):
+    """
+    > This function validates a Brazilian RG (Registro Geral) code
+
+    :param rg: ValidatorsRg
+    :type rg: ValidatorsRg
+    :return: A boolean value.
+    """
+    result = fordev.validators.is_valid_rg(rg.rg_code, rg.data_only)
+    return result
+
+
+def validators_bank_account(bank_account: ValidatorsBankAccount):
     """
     `validators_bank_account` validates a bank account
 
-    :param bank: The bank number
-    :type bank: int
-    :param agency: The agency number
-    :type agency: str
-    :param account: The account number
-    :type account: str
-    :param data_only: If True, the function will return a dictionary with the following keys:
-    :type data_only: bool
+    :param bank_account: ValidatorsBankAccount
+    :type bank_account: ValidatorsBankAccount
     :return: A boolean value.
     """
-    result = fordev.validators.is_valid_bank_account(bank, agency, account, data_only)
+    result = fordev.validators.is_valid_bank_account(bank_account.bank, bank_account.agency, bank_account.account,
+                                                     bank_account.data_only)
     return result
 
 
-def validators_certificate(certificate_code: str, data_only: bool):
+def validators_certificate(certificate: ValidatorsCertificate):
     """
-    `validators_certificate` checks if a certificate code is valid
+    `validators_certificate` checks if a certificate is valid
 
-    :param certificate_code: The certificate code to be validated
-    :type certificate_code: str
-    :param data_only: If True, the function will return only the data of the certificate. If False, the function will
-    return the data and the status of the certificate
-    :type data_only: bool
+    :param certificate: ValidatorsCertificate - the certificate to be validated
+    :type certificate: ValidatorsCertificate
     :return: A boolean value.
     """
-    result = fordev.validators.is_valid_certificate(certificate_code, data_only)
+    result = fordev.validators.is_valid_certificate(certificate.certificate_code, certificate.data_only)
     return result
 
 
-def validators_cnh(cnh_code: str, data_only: bool):
+def validators_cnh(cnh: ValidatorsCNH):
     """
-    It validates a CNH code.
+    > This function validates a Brazilian driver's license number (CNH) and returns a boolean value
 
-    :param cnh_code: The CNH code to be validated
-    :type cnh_code: str
-    :param data_only: If True, the function will only validate the data, not the check digit
-    :type data_only: bool
+    :param cnh: ValidatorsCNH
+    :type cnh: ValidatorsCNH
     :return: A boolean value.
     """
-    result = fordev.validators.is_valid_cnh(cnh_code, data_only)
+    result = fordev.validators.is_valid_cnh(cnh.cnh_code, cnh.data_only)
     return result
 
 
-def validators_cnpj(cnpj_code: str, data_only: bool):
+def validators_cnpj(cnpj: ValidatorsCNPJ):
     """
-    It validates a CNPJ code.
+    > This function validates a CNPJ code
 
-    :param cnpj_code: The CNPJ code to be validated
-    :type cnpj_code: str
-    :param data_only: If True, the function will return a dictionary with the following keys:
-    :type data_only: bool
+    :param cnpj: ValidatorsCNPJ
+    :type cnpj: ValidatorsCNPJ
     :return: A boolean value.
     """
-    result = fordev.validators.is_valid_cnpj(cnpj_code, data_only)
+    result = fordev.validators.is_valid_cnpj(cnpj.cnpj_code, cnpj.data_only)
     return result
 
 
-def validators_credit_card(flag: int, credit_card_code: str, data_only: bool):
+def validators_credit_card(credit_card: ValidatorsCreditCard):
     """
-    It validates a credit card number.
+    `validators_credit_card`: Validates a credit card number
 
-    :param flag: int
-    :type flag: int
-    :param credit_card_code: The credit card number to validate
-    :type credit_card_code: str
-    :param data_only: If True, the function will only return the data. If False, the function will return a tuple with
-    the data and the status
-    :type data_only: bool
+    :param credit_card: ValidatorsCreditCard
+    :type credit_card: ValidatorsCreditCard
     :return: A boolean value.
     """
-    result = fordev.validators.is_valid_credit_card(flag, credit_card_code, data_only)
+    result = fordev.validators.is_valid_credit_card(credit_card.flag, credit_card.credit_card_code,
+                                                    credit_card.data_only)
     return result
 
 
-def validators_pis_pasep(pis_pasep_code: str, data_only: bool):
+def validators_pis_pasep(pis_pasep: ValidatorsPisPasep):
     """
-    It validates the PIS/PASEP code.
+    > This function validates a PIS/PASEP number
 
-    :param pis_pasep_code: The PIS/PASEP code to be validated
-    :type pis_pasep_code: str
-    :param data_only: If True, the function will only validate the data part of the PIS/PASEP code
-    :type data_only: bool
+    :param pis_pasep: ValidatorsPisPasep
+    :type pis_pasep: ValidatorsPisPasep
     :return: A boolean value.
     """
-    result = fordev.validators.is_valid_pis_pasep(pis_pasep_code, data_only)
+    result = fordev.validators.is_valid_pis_pasep(pis_pasep.pis_pasep_code, pis_pasep.data_only)
     return result
 
 
-def validators_renavam(renavam_code: str, data_only: bool):
+def validators_renavam(renavam: ValidatorsRenavam):
     """
-    It validates the renavam code.
+    > This function validates a Brazilian vehicle registration number (Renavam)
 
-    :param renavam_code: The renavam code to be validated
-    :type renavam_code: str
-    :param data_only: If True, the validation will only be done with the data provided by the user. If False, the
-    validation will be done with the data provided by the user and with the data obtained from the Renavam API
-    :type data_only: bool
+    :param renavam: ValidatorsRenavam
+    :type renavam: ValidatorsRenavam
     :return: A boolean value.
     """
-    result = fordev.validators.is_valid_renavam(renavam_code, data_only)
+    result = fordev.validators.is_valid_renavam(renavam.renavam_code, renavam.data_only)
     return result
 
 
-def validators_state_registration(uf_code: str, state_registration_code: str, data_only: bool):
+def validators_state_registration(state_registration: ValidatorsStateRegistration):
     """
-    > Validates a state registration code (Inscrição Estadual) for a given state (UF) in Brazil
+    > It validates a Brazilian state registration number
 
-    :param uf_code: The code of the state where the company is located
-    :type uf_code: str
-    :param state_registration_code: The state registration code to be validated
-    :type state_registration_code: str
-    :param data_only: If True, the function will only return the data, without the status code
-    :type data_only: bool
+    :param state_registration: ValidatorsStateRegistration
+    :type state_registration: ValidatorsStateRegistration
     :return: A boolean value.
     """
-    result = fordev.validators.is_valid_state_registration(uf_code, state_registration_code, data_only)
+    result = fordev.validators.is_valid_state_registration(state_registration.uf_code,
+                                                           state_registration.state_registration_code,
+                                                           state_registration.data_only)
     return result
 
 
-def validators_voter_title_code(voter_title_code: str, data_only: bool):
+def validators_voter_title_code(voter_title: ValidatorsVoterTitle):
     """
     > This function validates the voter title code
 
-    :param voter_title_code: The voter title code to validate
-    :type voter_title_code: str
-    :param data_only: If True, only the data is validated. If False, the data and the schema are validated
-    :type data_only: bool
+    :param voter_title: ValidatorsVoterTitle
+    :type voter_title: ValidatorsVoterTitle
     :return: A boolean value.
     """
-    result = fordev.validators.is_valid_voter_title(voter_title_code, data_only)
+
+    result = fordev.validators.is_valid_voter_title(voter_title.voter_title_code, voter_title.data_only)
     return result
 
 
