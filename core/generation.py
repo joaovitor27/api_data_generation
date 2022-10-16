@@ -52,12 +52,9 @@ def generation_cpf(uf_code: str, formatting: bool, data_only: bool):
     return result
 
 
-def generation_city(uf_code: str, data_only: bool):
+def generation_data_city(uf_code: str, data_only: bool):
     """
-    `Generate a city name for a given state code.`
-
-    The first line of the function is a docstring. It's a string that describes what the function does. It's a good
-    practice to write docstrings for all your functions
+    > Generates a random city for the given uf_code
 
     :param uf_code: The state code, for example: SP, RJ, MG, etc
     :type uf_code: str
@@ -255,7 +252,7 @@ def generation_state_registration(uf_code: str, formatting: bool, data_only: boo
     return result
 
 
-def generation_uf(n: int, data_only):
+def generation_uf(n: int, data_only: bool):
     """
     It generates a random undirected graph with n vertices
 
@@ -342,16 +339,4 @@ def generation_vehicle_plate(uf_code: str, formatting: bool, data_only: bool):
     :return: A vehicle plate number.
     """
     result = fordev.generators.vehicle_plate(uf_code, formatting, data_only)
-    return result
-
-
-def generation_renavam_(data_only: bool):
-    """
-    `generation_renavam_` generates a random renavam
-
-    :param data_only: If True, the function will return only the data, without the mask
-    :type data_only: bool
-    :return: A string with the generated renavam.
-    """
-    result = fordev.generators.renavam(data_only)
     return result
